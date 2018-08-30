@@ -7,7 +7,7 @@ using RickAndMorty.Net.Api.Models.Enums;
 
 namespace RickAndMorty.Net.Api.Mapper
 {
-    public class MapperModule
+    internal class MapperModule
     {
         public static IMapper Resolve()
         {

@@ -3,8 +3,10 @@ using RickAndMorty.Net.Api.Models.Enums;
 
 namespace RickAndMorty.Net.Api.Helpers
 {
-    public static class BuildFilterUrlHelpers
+    internal static class BuildFilterUrlHelpers
     {
+        //TODO: change to generic param method Dictionary<string, string>? value and nameof?
+
         public static string BuildCharacterFilterUrl(this string baseUrl,
             string name = "",
             CharacterStatus? status = null,
@@ -24,5 +26,11 @@ namespace RickAndMorty.Net.Api.Helpers
                                       (!String.IsNullOrEmpty(name) ? $"{nameof(name)}={name}&" : "") +
                                       (!String.IsNullOrEmpty(type) ? $"{nameof(type)}={type}&" : "") +
                                       (!String.IsNullOrEmpty(dimension) ? $"{nameof(dimension)}={dimension}" : "");
+
+        public static string BuildEpisodeFilterUrl(this string baseUrl,
+            string name = "",
+            string episode = "") => baseUrl + "?" +
+                                      (!String.IsNullOrEmpty(name) ? $"{nameof(name)}={name}&" : "") +
+                                      (!String.IsNullOrEmpty(episode) ? $"{nameof(episode)}={episode}&" : "");
     }
 }

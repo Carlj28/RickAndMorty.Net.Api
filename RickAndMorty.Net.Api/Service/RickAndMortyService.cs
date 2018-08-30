@@ -11,7 +11,7 @@ using RickAndMorty.Net.Api.Models.Enums;
 
 namespace RickAndMorty.Net.Api.Service
 {
-    public class RickAndMortyService : BaseService, IRickAndMortyService
+    internal class RickAndMortyService : BaseService, IRickAndMortyService
     {
         public RickAndMortyService(IMapper mapper, string baseAddress = "https://rickandmortyapi.com/") : base(mapper, baseAddress)
         {
@@ -94,6 +94,43 @@ namespace RickAndMorty.Net.Api.Service
             var dto = await GetPages<LocationDto>(url);
 
             return Mapper.Map<IEnumerable<Location>>(dto);
+        }
+
+        public async Task<IEnumerable<Episode>> GetAllEpisodes()
+        {
+            var dto = await GetPages<EpisodeDto>("api/episode/");
+
+            return Mapper.Map<IEnumerable<Episode>>(dto);
+        }
+
+        public async Task<Episode> GetEpisode(int id)
+        {
+            Ensure.Bool.IsTrue(id > 0);
+
+            var dto = await Get<EpisodeDto>($"api/episode/{id}");
+
+            return Mapper.Map<Episode>(dto);
+        }
+
+        public async Task<IEnumerable<Episode>> GetMultipleEpisodes(int[] ids)
+        {
+            Ensure.Bool.IsTrue(ids.Any());
+
+            var dto = await Get<IEnumerable<EpisodeDto>>($"api/episode/{string.Join(",", ids)}");
+
+            return Mapper.Map<IEnumerable<Episode>>(dto);
+        }
+
+        public async Task<IEnumerable<Episode>> FilterEpisodes(string name = "",
+            string episode = "")
+        {
+            Ensure.Bool.IsTrue(!String.IsNullOrEmpty(name) || !String.IsNullOrEmpty(episode));
+
+            var url = "/api/episode/".BuildEpisodeFilterUrl(name, episode);
+
+            var dto = await GetPages<EpisodeDto>(url);
+
+            return Mapper.Map<IEnumerable<Episode>>(dto);
         }
     }
 }

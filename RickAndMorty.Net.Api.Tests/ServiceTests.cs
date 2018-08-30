@@ -12,7 +12,7 @@ namespace RickAndMorty.Net.Api.Tests
         //TODO: check more conditions in assert
         //TODO: comments
 
-        private readonly IRickAndMortyService RickAndMortyService;
+        private IRickAndMortyService RickAndMortyService { get; }
 
         public ServiceTests()
         {
@@ -40,7 +40,7 @@ namespace RickAndMorty.Net.Api.Tests
         [Fact]
         public async void GetMultipleCharactersTest()
         {
-            var result = await RickAndMortyService.GetMultipleCharacters(new []{5, 10});
+            var result = await RickAndMortyService.GetMultipleCharacters(new[] { 5, 10 });
 
             Assert.NotNull(result);
             Assert.True(result.Any());
@@ -67,7 +67,7 @@ namespace RickAndMorty.Net.Api.Tests
         [Fact]
         public async void GetMultipleLocationsTest()
         {
-            var result = await RickAndMortyService.GetMultipleLocations(new [] {5, 10});
+            var result = await RickAndMortyService.GetMultipleLocations(new[] { 5, 10 });
 
             Assert.NotNull(result);
             Assert.True(result.Any());
@@ -86,6 +86,42 @@ namespace RickAndMorty.Net.Api.Tests
         public async void FilterLocationsTest()
         {
             var result = await RickAndMortyService.FilterLocations("earth");
+
+            Assert.NotNull(result);
+            Assert.True(result.Any());
+        }
+
+        [Fact]
+        public async void GetAllEpisodesTest()
+        {
+            var result = await RickAndMortyService.GetAllEpisodes();
+
+            Assert.NotNull(result);
+            Assert.True(result.Any());
+        }
+
+        [Fact]
+        public async void GetEpisodeTest()
+        {
+            var result = await RickAndMortyService.GetEpisode(5);
+
+            Assert.NotNull(result);
+            Assert.True(result.Id == 5);
+        }
+
+        [Fact]
+        public async void GetMultipleEpisodesTest()
+        {
+            var result = await RickAndMortyService.GetMultipleEpisodes(new[] { 5, 10 });
+
+            Assert.NotNull(result);
+            Assert.True(result.Any());
+        }
+
+        [Fact]
+        public async void FilterEpisodesTest()
+        {
+            var result = await RickAndMortyService.FilterEpisodes(name:"Rick");
 
             Assert.NotNull(result);
             Assert.True(result.Any());

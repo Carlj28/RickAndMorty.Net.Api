@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace RickAndMorty.Net.Api.Helpers
 {
-    public static class GetNextPageHelper
+    internal static class GetNextPageHelper
     {
         static readonly Regex PagePattern = new Regex("page=(?<pagenr>[0-9]+)");
 
