@@ -1,6 +1,6 @@
 ﻿namespace RickAndMorty.Net.Api.Models.Dto
 {
-    public class PageInfoDto
+    internal class PageInfoDto
     {
         public int Count { get; set; }
         public int Pages { get; set; }

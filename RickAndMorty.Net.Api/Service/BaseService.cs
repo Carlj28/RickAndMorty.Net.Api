@@ -6,7 +6,6 @@ using AutoMapper;
 using EnsureThat;
 using Newtonsoft.Json;
 using RickAndMorty.Net.Api.Helpers;
-using RickAndMorty.Net.Api.Models.Domain;
 using RickAndMorty.Net.Api.Models.Dto;
 
 namespace RickAndMorty.Net.Api.Service

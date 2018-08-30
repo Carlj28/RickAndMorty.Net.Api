@@ -10,6 +10,7 @@ namespace RickAndMorty.Net.Api.Tests
     {
         //TODO: not only happy path tests
         //TODO: check more conditions in assert
+        //TODO: comments
 
         private readonly IRickAndMortyService RickAndMortyService;
 

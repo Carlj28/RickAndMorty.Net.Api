@@ -1,6 +1,6 @@
 ﻿namespace RickAndMorty.Net.Api.Models.Dto
 {
-    public class LocationDto
+    internal class LocationDto
     {
         /// <summary>
         /// The id of the location.

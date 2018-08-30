@@ -2,7 +2,7 @@
 
 namespace RickAndMorty.Net.Api.Models.Dto
 {
-    public class PageDto<T>
+    internal class PageDto<T>
     {
         public PageInfoDto Info { get; set; }
         public IEnumerable<T> Results { get; set; }
