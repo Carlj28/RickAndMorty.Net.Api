@@ -16,6 +16,8 @@ namespace RickAndMorty.Net.Api.Mapper
 
                 cfg.CreateMap<Character, CharacterDto>().ReverseMap();
 
+                cfg.CreateMap<Location, LocationDto>().ReverseMap();
+
                 cfg.AllowNullCollections = true;
             });
 

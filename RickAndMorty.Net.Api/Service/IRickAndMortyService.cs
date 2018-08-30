@@ -15,5 +15,11 @@ namespace RickAndMorty.Net.Api.Service
             string species = "",
             string type = "",
             CharacterGender? gender = null);
+        Task<IEnumerable<Location>> GetAllLocations();
+        Task<IEnumerable<Location>> GetMultipleLocations(int[] ids);
+        Task<Location> GetLocation(int id);
+        Task<IEnumerable<Location>> FilterLocations(string name = "",
+            string type = "",
+            string dimension = "");
     }
 }

@@ -41,7 +41,7 @@ namespace RickAndMorty.Net.Api.Service
 
             do
             {
-                var dto = await Get<PageDto<T>>(nextPage == -1 ? url : $"{url}{(url.Contains("?") ? "" : "?")}page={nextPage}");
+                var dto = await Get<PageDto<T>>(nextPage == -1 ? url : $"{url}{(url.Contains("?") ? "&" : "?")}page={nextPage}");
                 result.AddRange(dto.Results);
 
                 nextPage = dto.Info.Next.GetNextPageNumber();
