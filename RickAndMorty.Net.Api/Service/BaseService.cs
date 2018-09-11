@@ -27,12 +27,24 @@ namespace RickAndMorty.Net.Api.Service
             };
         }
 
+        /// <summary>
+        /// HTTP get async and json deserialization.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
         protected async Task<T> Get<T>(string path)
         {
             var response = await Client.GetAsync(path);
             return response.IsSuccessStatusCode ? JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync()) : default(T);
         }
 
+        /// <summary>
+        /// Gets all pages objects to single enumerable.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <returns></returns>
         protected async Task<IEnumerable<T>> GetPages<T>(string url)
         {
             var result = new List<T>();

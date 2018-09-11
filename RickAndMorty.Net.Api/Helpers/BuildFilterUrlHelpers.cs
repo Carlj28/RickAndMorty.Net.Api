@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using RickAndMorty.Net.Api.Models.Enums;
 
+[assembly: InternalsVisibleTo("RickAndMorty.Net.Api.Tests")]
 namespace RickAndMorty.Net.Api.Helpers
 {
     internal static class BuildFilterUrlHelpers

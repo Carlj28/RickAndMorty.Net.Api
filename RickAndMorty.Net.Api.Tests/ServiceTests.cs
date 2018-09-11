@@ -1,5 +1,5 @@
 using System.Linq;
-using RickAndMorty.Net.Api.Mapper;
+using RickAndMorty.Net.Api.Factory;
 using RickAndMorty.Net.Api.Models.Enums;
 using RickAndMorty.Net.Api.Service;
 using Xunit;
@@ -16,7 +16,7 @@ namespace RickAndMorty.Net.Api.Tests
 
         public ServiceTests()
         {
-            RickAndMortyService = new RickAndMortyService(MapperModule.Resolve());
+            RickAndMortyService = RickAndMortyApiFactory.Create();
         }
 
         [Fact]
