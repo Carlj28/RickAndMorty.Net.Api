@@ -6,6 +6,14 @@
 
 https://www.nuget.org/packages/RickAndMorty.Net.Api/
 
+```Bash
+Package Manager:
+Install-Package RickAndMorty.Net.Api
+
+.NET CLI
+dotnet add package RickAndMorty.Net.Api
+```
+
 # Usage
 
 Get service from factory class:
