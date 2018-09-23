@@ -1,40 +1,65 @@
-﻿namespace RickAndMorty.Net.Api.Models.Domain
+﻿using System;
+using System.Collections.Generic;
+
+namespace RickAndMorty.Net.Api.Models.Domain
 {
     public class Location
     {
         /// <summary>
-        /// The id of the location.
+        /// Constructor of <see cref="Episode"/>.
         /// </summary>
-        public int Id { get; set; }
+        /// <param name="id">The id of the location.</param>
+        /// <param name="name">The name of the location.</param>
+        /// <param name="type">The type of the location.</param>
+        /// <param name="dimension">The dimension in which the location is located.</param>
+        /// <param name="residents">List of character who have been last seen in the location.</param>
+        /// <param name="url">Link to the location's own endpoint.</param>
+        /// <param name="created">Time at which the location was created in the database.</param>
+        public Location(int id = 0, string name = "", string type = "", string dimension = "", IEnumerable<Uri> residents = null,
+            Uri url = null, DateTime? created = null)
+        {
+            Id = id;
+            Name = name;
+            Type = type;
+            Dimension = dimension;
+            Residents = residents;
+            Url = url;
+            Created = created;
+        }
 
         /// <summary>
-        /// The name of the location.
+        /// Gets the id of the location.
         /// </summary>
-        public string Name { get; set; }
+        public int Id { get; }
 
         /// <summary>
-        /// The type of the location.
+        /// Gets the name of the location.
         /// </summary>
-        public string Type { get; set; }
+        public string Name { get; }
 
         /// <summary>
-        /// The dimension in which the location is located.
+        /// Gets the type of the location.
         /// </summary>
-        public string Dimension { get; set; }
+        public string Type { get; }
 
         /// <summary>
-        /// List of character who have been last seen in the location.
+        /// Gets the dimension in which the location is located.
         /// </summary>
-        public string[] Residents { get; set; }
+        public string Dimension { get; }
 
         /// <summary>
-        /// Link to the location's own endpoint.
+        /// Gets list of character who have been last seen in the location.
         /// </summary>
-        public string Url { get; set; }
+        public IEnumerable<Uri> Residents { get; }
 
         /// <summary>
-        /// Time at which the location was created in the database. 
+        /// Gets link to the location's own endpoint.
         /// </summary>
-        public string Created { get; set; }
+        public Uri Url { get; }
+
+        /// <summary>
+        /// Gets time at which the location was created in the database. 
+        /// </summary>
+        public DateTime? Created { get; }
     }
 }

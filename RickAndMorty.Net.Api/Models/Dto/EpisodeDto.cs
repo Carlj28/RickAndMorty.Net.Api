@@ -17,7 +17,7 @@ namespace RickAndMorty.Net.Api.Models.Dto
         /// <summary>
         /// The air date of the episode.
         /// </summary>
-        public DateTime Air_date { get; set; }
+        public string Air_date { get; set; }
 
         /// <summary>
         ///	The code of the episode. 

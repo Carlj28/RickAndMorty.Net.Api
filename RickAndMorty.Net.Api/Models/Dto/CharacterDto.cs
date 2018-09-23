@@ -64,6 +64,6 @@ namespace RickAndMorty.Net.Api.Models.Dto
         /// <summary>
         /// Time at which the character was created in the database.
         /// </summary>
-        public DateTime Created { get; set; }
+        public string Created { get; set; }
     }
 }

@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using AutoMapper;
 using EnsureThat;
 using Newtonsoft.Json;
 using RickAndMorty.Net.Api.Helpers;
+using RickAndMorty.Net.Api.Models.Domain;
 using RickAndMorty.Net.Api.Models.Dto;
 
 namespace RickAndMorty.Net.Api.Service
 {
-    public abstract class BaseService
+    internal abstract class BaseService
     {
         private HttpClient Client { get; }
-        protected IMapper Mapper { get; }
+        protected IRickAndMortyMapper RickAndMortyMapper { get; }
 
-        protected BaseService(IMapper mapper, string baseAddress)
+        protected BaseService(IRickAndMortyMapper rickAndMortyMapper, string baseAddress)
         {
-            Mapper = mapper;
+            RickAndMortyMapper = rickAndMortyMapper;
 
             Ensure.Bool.IsTrue(Uri.IsWellFormedUriString(baseAddress, UriKind.RelativeOrAbsolute));
 

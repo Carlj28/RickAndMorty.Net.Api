@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
+using RickAndMorty.Net.Api.Helpers;
 using RickAndMorty.Net.Api.Models.Domain;
 using RickAndMorty.Net.Api.Models.Dto;
 using RickAndMorty.Net.Api.Models.Enums;
@@ -9,43 +10,42 @@ namespace RickAndMorty.Net.Api.Mapper
 {
     internal class MapperModule
     {
-        public static IMapper Resolve()
+        internal static IRickAndMortyMapper Resolve()
         {
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CharacterLocationDto, CharacterLocation>()
-                    .ForMember(dest => dest.Url,
-                        opts => opts.MapFrom(src => String.IsNullOrEmpty(src.Url) ? null : new Uri(src.Url)));
+                    .ConstructUsing(cls =>
+                        new CharacterLocation(cls.Name, cls.Url.ToUri()));
 
                 cfg.CreateMap<CharacterOriginDto, CharacterOrigin>()
-                    .ForMember(dest => dest.Url,
-                        opts => opts.MapFrom(src => String.IsNullOrEmpty(src.Url) ? null : new Uri(src.Url)));
+                    .ConstructUsing(cls =>
+                        new CharacterOrigin(cls.Name, cls.Url.ToUri()));
 
                 cfg.CreateMap<CharacterDto, Character>()
-                    .ForMember(dest => dest.Status,
-                        opts => opts.MapFrom(src => String.IsNullOrEmpty(src.Status) ? null : Enum.Parse(typeof(CharacterStatus), src.Status, true)))
-                    .ForMember(dest => dest.Gender,
-                        opts => opts.MapFrom(src => String.IsNullOrEmpty(src.Gender) ? null : Enum.Parse(typeof(CharacterGender), src.Gender, true)))
-                    .ForMember(dest => dest.Image,
-                        opts => opts.MapFrom(src => String.IsNullOrEmpty(src.Image) ? null : new Uri(src.Image)))
-                    .ForMember(dest => dest.Episode,
-                        opts => opts.MapFrom(src => src.Episode.Select(e => String.IsNullOrEmpty(e) ? null : new Uri(e))))
-                    .ForMember(dest => dest.Url,
-                        opts => opts.MapFrom(src => String.IsNullOrEmpty(src.Url) ? null : new Uri(src.Url)));
+                    .ConstructUsing(cls =>
+                        new Character(cls.Id, cls.Name, cls.Status.ToEnum<CharacterStatus>(),
+                            cls.Species, cls.Type, cls.Gender.ToEnum<CharacterGender>(),
+                            new CharacterLocation(cls.Location.Name, cls.Location.Url.ToUri()),
+                            new CharacterOrigin(cls.Origin.Name, cls.Origin.Url.ToUri()),
+                            cls.Url.ToUri(), cls.Episode.Select(x => x.ToUri()),
+                            cls.Url.ToUri(), cls.Created.ToDateTime()));
 
 
-                cfg.CreateMap<LocationDto, Location>();
+                cfg.CreateMap<LocationDto, Location>()
+                    .ConstructUsing(cls =>
+                        new Location(cls.Id, cls.Name, cls.Type, cls.Dimension, cls.Residents.Select(x => x.ToUri()), cls.Url.ToUri(),
+                            cls.Created.ToDateTime()));
 
                 cfg.CreateMap<EpisodeDto, Episode>()
-                    .ForMember(dest => dest.AirDate,
-                        opts => opts.MapFrom(src => src.Air_date))
-                    .ForMember(dest => dest.EpisodeCode,
-                        opts => opts.MapFrom(src => src.Episode));
+                    .ConstructUsing(cls =>
+                        new Episode(cls.Id, cls.Name, cls.Air_date.ToDateTime(), cls.Episode,
+                            cls.Characters.Select(x => x.ToUri()), cls.Url.ToUri(), cls.Created.ToDateTime()));
 
                 cfg.AllowNullCollections = true;
             });
 
-            return config.CreateMapper();
+            return new RickAndMortyMapper { Mapper = config.CreateMapper() };
         }
     }
 }

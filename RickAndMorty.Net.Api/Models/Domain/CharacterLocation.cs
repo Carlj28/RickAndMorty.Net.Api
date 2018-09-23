@@ -5,13 +5,24 @@ namespace RickAndMorty.Net.Api.Models.Domain
     public class CharacterLocation
     {
         /// <summary>
-        /// Name to the character's last known location.
+        /// Constructor of <see cref="CharacterLocation"/>.
         /// </summary>
-        public string Name { get; set; }
+        /// <param name="name">Name to the character's last known location.</param>
+        /// <param name="url">Link to the character's last known location.</param>
+        public CharacterLocation(string name = "", Uri url = null)
+        {
+            Name = name;
+            Url = url;
+        }
 
         /// <summary>
-        /// Link to the character's last known location.
+        /// Gets name to the character's last known location.
         /// </summary>
-        public Uri Url { get; set; }
+        public string Name { get; }
+
+        /// <summary>
+        /// Gets link to the character's last known location.
+        /// </summary>
+        public Uri Url { get; }
     }
 }

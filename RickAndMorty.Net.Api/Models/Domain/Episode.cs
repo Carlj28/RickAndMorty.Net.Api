@@ -1,42 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RickAndMorty.Net.Api.Models.Domain
 {
     public class Episode
     {
         /// <summary>
-        /// The id of the episode.
+        /// Constructor of <see cref="Episode"/>.
         /// </summary>
-        public int Id { get; set; }
+        /// <param name="id">The id of the episode.</param>
+        /// <param name="name">The name of the episode.</param>
+        /// <param name="airDate">The air date of the episode.</param>
+        /// <param name="episodeCode">The code of the episode. </param>
+        /// <param name="characters">List of characters who have been seen in the episode.</param>
+        /// <param name="url">Link to the episode's own endpoint.</param>
+        /// <param name="created">Time at which the episode was created in the database.</param>
+        public Episode(int id = 0, string name = "", DateTime? airDate = null,
+            string episodeCode = "", IEnumerable<Uri> characters = null,
+            Uri url = null, DateTime? created = null)
+        {
+            Id = id;
+            Name = name;
+            AirDate = airDate;
+            EpisodeCode = episodeCode;
+            Characters = characters;
+            Url = url;
+            Created = created;
+        }
 
         /// <summary>
-        /// The name of the episode.
+        /// Gets the id of the episode.
         /// </summary>
-        public string Name { get; set; }
+        public int Id { get; }
 
         /// <summary>
-        /// The air date of the episode.
+        /// Gets the name of the episode.
         /// </summary>
-        public DateTime AirDate { get; set; }
+        public string Name { get; }
 
         /// <summary>
-        ///	The code of the episode. 
+        /// Gets the air date of the episode.
         /// </summary>
-        public string EpisodeCode { get; set; }
+        public DateTime? AirDate { get; }
 
         /// <summary>
-        /// List of characters who have been seen in the episode.
+        ///	Gets the code of the episode. 
         /// </summary>
-        public string[] Characters { get; set; }
+        public string EpisodeCode { get; }
 
         /// <summary>
-        /// Link to the episode's own endpoint.
+        /// Gets list of characters who have been seen in the episode.
         /// </summary>
-        public string Url { get; set; }
+        public IEnumerable<Uri> Characters { get; }
 
         /// <summary>
-        /// Time at which the episode was created in the database.
+        /// Gets link to the episode's own endpoint.
         /// </summary>
-        public string Created { get; set; }
+        public Uri Url { get; }
+
+        /// <summary>
+        /// Gets time at which the episode was created in the database.
+        /// </summary>
+        public DateTime? Created { get; }
     }
 }

@@ -7,10 +7,9 @@ var target = Argument("Target", "Build");
 
 var configuration = Argument("Configuration", "Release");
 
+var nuGetKey = Argument("NuGetKey", "");
 var packageOutputPath = Argument<DirectoryPath>("PackageOutputPath", "packages");
 var publishOutputPath = Argument<DirectoryPath>("PublishOutputPath", "publish");
-
-var packagePath = File("RandomRickAndMortyFacts.zip").Path;
 
 var packageVersion = "0.1.0";
 
@@ -24,7 +23,7 @@ Task("Build")
 	.Does(() => {
 		//Net Core build
 
-		DotNetCoreBuild(Paths.SolutionFile.ToString(),
+		DotNetCoreBuild(Variables.SolutionFile.ToString(),
 					new DotNetCoreBuildSettings {
 							Configuration = configuration
 						});
@@ -48,18 +47,34 @@ Task("RemovePackages")
 	});
 
 Task("CreateNugetPackages")
-	.IsDependentOn("Build")	
+	.IsDependentOn("RunTests")
 	.IsDependentOn("RemovePackages")
 	.Does(() => {
 
 		EnsureDirectoryExists(packageOutputPath);
 
-		DotNetCorePack(Paths.ProjectDirectory.ToString(),
+		DotNetCorePack(Variables.ProjectDirectory.ToString(),
 			new DotNetCorePackSettings{
 					Configuration = configuration,
 					OutputDirectory = packageOutputPath
 				});
 	});
+
+Task("PushPackage")
+.IsDependentOn("CreateNugetPackages")
+.Does(() => {
+
+	//List all package files
+	var d = new DirectoryInfo(packageOutputPath.ToString());
+	var Files = d.GetFiles("*.nupkg").Select(x => new FilePath(x.FullName));
+
+	Information($"Files found to publish: {string.Join(" ", Files)}");
+
+	NuGetPush(Files, new NuGetPushSettings {
+     Source = Variables.NugetSource,
+     ApiKey = nuGetKey
+ });
+});
 
 //------------------------------------------------------
 //Versioning
@@ -78,7 +93,7 @@ Task("RunTests")
 	.Does(() => 
 {
 	//DotNetCoreTest automaticly builds solution so you don't need to depend on build task
-	DotNetCoreTest(Paths.TestProjectDir.ToString());
+	DotNetCoreTest(Variables.TestProjectDir.ToString());
 });
 
 RunTarget(target);

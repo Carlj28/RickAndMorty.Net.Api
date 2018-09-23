@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using RickAndMorty.Net.Api.Factory;
 using RickAndMorty.Net.Api.Models.Enums;
@@ -8,8 +9,6 @@ namespace RickAndMorty.Net.Api.Tests
 {
     public class ServiceTests
     {
-        //TODO: not only happy path tests
-        //TODO: check more conditions in assert
         //TODO: comments
 
         private IRickAndMortyService RickAndMortyService { get; }
@@ -19,13 +18,18 @@ namespace RickAndMorty.Net.Api.Tests
             RickAndMortyService = RickAndMortyApiFactory.Create();
         }
 
-        [Fact]
-        public async void GetCharacterTest()
+        [Theory]
+        [InlineData(6)]
+        public async void GetCharacterTest(int value)
         {
-            var result = await RickAndMortyService.GetCharacter(5);
+            var result = await RickAndMortyService.GetCharacter(value);
 
             Assert.NotNull(result);
-            Assert.True(result.Id == 5);
+            Assert.True(result.Id == value);
+            Assert.True(!String.IsNullOrEmpty(result.Name));
+            Assert.True(!String.IsNullOrEmpty(result.Species));
+            Assert.True(result.Created != default(DateTime));
+            Assert.NotEmpty(result.Episode);
         }
 
         [Fact]
@@ -35,24 +39,38 @@ namespace RickAndMorty.Net.Api.Tests
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().Species));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Episode);
         }
 
-        [Fact]
-        public async void GetMultipleCharactersTest()
+        [Theory]
+        [InlineData(new[] {5, 10})]
+        public async void GetMultipleCharactersTest(int[] value)
         {
-            var result = await RickAndMortyService.GetMultipleCharacters(new[] { 5, 10 });
+            var result = await RickAndMortyService.GetMultipleCharacters(value);
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().Species));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Episode);
         }
 
-        [Fact]
-        public async void FilterCharactersTest()
+        [Theory]
+        [InlineData(CharacterStatus.Alive)]
+        public async void FilterCharactersTest(CharacterStatus value)
         {
-            var result = await RickAndMortyService.FilterCharacters(characterStatus: CharacterStatus.Alive);
+            var result = await RickAndMortyService.FilterCharacters(characterStatus: value);
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().Species));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Episode);
         }
 
         [Fact]
@@ -62,33 +80,52 @@ namespace RickAndMorty.Net.Api.Tests
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().Dimension));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Residents);
         }
 
-        [Fact]
-        public async void GetMultipleLocationsTest()
+        [Theory]
+        [InlineData(new[] { 5, 10 })]
+        public async void GetMultipleLocationsTest(int[] value)
         {
-            var result = await RickAndMortyService.GetMultipleLocations(new[] { 5, 10 });
+            var result = await RickAndMortyService.GetMultipleLocations(value);
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().Dimension));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Residents);
         }
 
-        [Fact]
-        public async void GetLocationTest()
+        [Theory]
+        [InlineData(6)]
+        public async void GetLocationTest(int value)
         {
-            var result = await RickAndMortyService.GetLocation(5);
+            var result = await RickAndMortyService.GetLocation(value);
 
             Assert.NotNull(result);
-            Assert.True(result.Id == 5);
+            Assert.True(result.Id == value);
+            Assert.True(!String.IsNullOrEmpty(result.Name));
+            Assert.True(!String.IsNullOrEmpty(result.Dimension));
+            Assert.True(result.Created != default(DateTime));
+            Assert.NotEmpty(result.Residents);
         }
 
-        [Fact]
-        public async void FilterLocationsTest()
+        [Theory]
+        [InlineData("earth")]
+        public async void FilterLocationsTest(string value)
         {
-            var result = await RickAndMortyService.FilterLocations("earth");
+            var result = await RickAndMortyService.FilterLocations(value);
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().Dimension));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Residents);
         }
 
         [Fact]
@@ -98,33 +135,52 @@ namespace RickAndMorty.Net.Api.Tests
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().EpisodeCode));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Characters);
         }
 
-        [Fact]
-        public async void GetEpisodeTest()
+        [Theory]
+        [InlineData(5)]
+        public async void GetEpisodeTest(int value)
         {
-            var result = await RickAndMortyService.GetEpisode(5);
+            var result = await RickAndMortyService.GetEpisode(value);
 
             Assert.NotNull(result);
-            Assert.True(result.Id == 5);
+            Assert.True(result.Id == value);
+            Assert.True(!String.IsNullOrEmpty(result.Name));
+            Assert.True(!String.IsNullOrEmpty(result.EpisodeCode));
+            Assert.True(result.Created != default(DateTime));
+            Assert.NotEmpty(result.Characters);
         }
 
-        [Fact]
-        public async void GetMultipleEpisodesTest()
+        [Theory]
+        [InlineData(new[] { 5, 10 })]
+        public async void GetMultipleEpisodesTest(int[] value)
         {
-            var result = await RickAndMortyService.GetMultipleEpisodes(new[] { 5, 10 });
+            var result = await RickAndMortyService.GetMultipleEpisodes(value);
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().EpisodeCode));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Characters);
         }
 
-        [Fact]
-        public async void FilterEpisodesTest()
+        [Theory]
+        [InlineData("Rick")]
+        public async void FilterEpisodesTest(string value)
         {
-            var result = await RickAndMortyService.FilterEpisodes(name:"Rick");
+            var result = await RickAndMortyService.FilterEpisodes(name:value);
 
             Assert.NotNull(result);
             Assert.True(result.Any());
+            Assert.True(!String.IsNullOrEmpty(result.First().Name));
+            Assert.True(!String.IsNullOrEmpty(result.First().EpisodeCode));
+            Assert.True(result.First().Created != default(DateTime));
+            Assert.NotEmpty(result.First().Characters);
         }
     }
 }

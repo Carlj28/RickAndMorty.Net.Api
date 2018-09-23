@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 public static string ReadVersionNumberFromProject(ICakeContext context)
 {
-    var file = context.GetFiles(Paths.ProjectFile.ToString()).First();
+    var file = context.GetFiles(Variables.ProjectFile.ToString()).First();
     var project = ReadFile(file);
     return ParseVersionNumber(project);
 }
