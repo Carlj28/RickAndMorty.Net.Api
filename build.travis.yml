@@ -1,8 +1,0 @@
-sudo: required                #run commands as root
-
-language: csharp              #language
-mono: latest                  #install latest version of mono
-dotnet: 2.1.402                #install latest dotnet
-
-script:
-  - ./build.sh
