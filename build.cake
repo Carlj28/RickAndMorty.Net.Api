@@ -75,11 +75,11 @@ Task("PushPackage")
 	if(String.IsNullOrEmpty(key))
 		return;
 	else
-		Information($"Loaded nuget key.");
+		Information($"Loaded nuget key. {key}");
 
 	NuGetPush(Files, new NuGetPushSettings {
      Source = Variables.NugetSource,
-     ApiKey = EnvironmentVariable("NugetKey")
+     ApiKey = key
  });
 });
 
