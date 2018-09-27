@@ -70,6 +70,13 @@ Task("PushPackage")
 
 	Information($"Files found to publish: {string.Join(" ", Files)}");
 
+	var key = EnvironmentVariable("NugetKey");
+
+	if(String.IsNullOrEmpty(key))
+		return;
+	else
+		Information($"Loaded nuget key.");
+
 	NuGetPush(Files, new NuGetPushSettings {
      Source = Variables.NugetSource,
      ApiKey = EnvironmentVariable("NugetKey")

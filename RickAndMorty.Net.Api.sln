@@ -9,8 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RickAndMorty.Net.Api.Tests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FAE0AC4-1EDB-46B8-87C4-C5E098C192BC}"
 	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
 		build.cake = build.cake
 		build.ps1 = build.ps1
+		build.sh = build.sh
 		variables.cake = variables.cake
 		versioning.cake = versioning.cake
 	EndProjectSection
