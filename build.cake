@@ -63,24 +63,25 @@ Task("CreateNugetPackages")
 Task("PushPackage")
 .IsDependentOn("CreateNugetPackages")
 .Does(() => {
-
-	//List all package files
-	var d = new DirectoryInfo(packageOutputPath.ToString());
-	var Files = d.GetFiles("*.nupkg").Select(x => new FilePath(x.FullName));
-
-	Information($"Files found to publish: {string.Join(" ", Files)}");
-
 	var key = EnvironmentVariable("NugetKey");
 
 	if(String.IsNullOrEmpty(key))
 		return;
 	else
-		Information($"Loaded nuget key. {key}");
+		Information($"Loaded nuget key.");
 
-	DotNetCoreNuGetPush(Files, new NuGetPushSettings {
-     Source = Variables.NugetSource,
-     ApiKey = key
- });
+	foreach(var file in GetFiles($"{packageOutputPath}/*.nupkg"))
+	{
+		Information($"---###---");
+		Information($"Publising file: {file.FullPath}");
+
+		DotNetCoreNuGetPush(file.FullPath, new DotNetCoreNuGetPushSettings {
+			Source = Variables.NugetSource,
+			ApiKey = key
+		});
+
+		Information("File published!");
+	}
 });
 
 //------------------------------------------------------
