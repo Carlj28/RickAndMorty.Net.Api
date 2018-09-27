@@ -1,5 +1,7 @@
 # RickAndMorty.Net.Api
 
+![alt text](https://travis-ci.org/Carlj28/RickAndMorty.Net.Api.svg?branch=master)
+
 .NET client for Rick And Morty knowledge base api: https://rickandmortyapi.com/
 
 # Get from nuget
