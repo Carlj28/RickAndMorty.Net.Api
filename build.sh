@@ -10,10 +10,37 @@ SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 TOOLS_DIR=$SCRIPT_DIR/tools
 CAKE_VERSION=0.30.0
 CAKE_DLL=$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION/Cake.dll
+NUGET_EXE=$TOOLS_DIR/nuget.exe
 
-# Make sure the tools folder exist.
+###########################################################################
+# Make sure the tools folder exist
+###########################################################################
 if [ ! -d "$TOOLS_DIR" ]; then
   mkdir "$TOOLS_DIR"
+fi
+
+###########################################################################
+# Make sure that packages.config exist.
+###########################################################################
+if [ ! -f "$TOOLS_DIR/packages.config" ]; then
+    echo "Downloading packages.config..."
+    curl -Lsfo "$TOOLS_DIR/packages.config" https://cakebuild.net/download/bootstrapper/packages
+    if [ $? -ne 0 ]; then
+        echo "An error occurred while downloading packages.config."
+        exit 1
+    fi
+fi
+
+###########################################################################
+# Download NuGet if it does not exist
+###########################################################################
+if [ ! -f "$NUGET_EXE" ]; then
+    echo "Downloading NuGet..."
+    curl -Lsfo "$NUGET_EXE" https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+    if [ $? -ne 0 ]; then
+        echo "An error occurred while downloading nuget.exe."
+        exit 1
+    fi
 fi
 
 ###########################################################################
