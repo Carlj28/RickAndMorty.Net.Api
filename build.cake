@@ -77,7 +77,7 @@ Task("PushPackage")
 	else
 		Information($"Loaded nuget key. {key}");
 
-	NuGetPush(Files, new NuGetPushSettings {
+	DotNetCoreNuGetPush(Files, new NuGetPushSettings {
      Source = Variables.NugetSource,
      ApiKey = key
  });

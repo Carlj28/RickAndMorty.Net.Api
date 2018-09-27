@@ -33,18 +33,6 @@ if [ ! -f "$TOOLS_DIR/packages.config" ]; then
 fi
 
 ###########################################################################
-# Download NuGet if it does not exist
-###########################################################################
-if [ ! -f "$NUGET_EXE" ]; then
-    echo "Downloading NuGet..."
-    curl -Lsfo "$NUGET_EXE" https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-    if [ $? -ne 0 ]; then
-        echo "An error occurred while downloading nuget.exe."
-        exit 1
-    fi
-fi
-
-###########################################################################
 # INSTALL .NET CORE CLI
 ###########################################################################
 
