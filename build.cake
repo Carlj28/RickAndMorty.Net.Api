@@ -72,7 +72,7 @@ Task("PushPackage")
 
 	NuGetPush(Files, new NuGetPushSettings {
      Source = Variables.NugetSource,
-     ApiKey = EnvirionmentVariable("NugetKey")
+     ApiKey = EnvironmentVariable("NugetKey")
  });
 });
 
