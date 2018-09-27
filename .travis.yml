@@ -8,4 +8,4 @@ before_install:
   - chmod +x build.sh         #add execution permission
 
 script:
-  - ./build.sh
+  - ./build.sh --Target="PushPackage"

@@ -7,7 +7,7 @@ var target = Argument("Target", "Build");
 
 var configuration = Argument("Configuration", "Release");
 
-var nuGetKey = Argument("NuGetKey", "");
+//var nuGetKey = Argument("NuGetKey", "");
 var packageOutputPath = Argument<DirectoryPath>("PackageOutputPath", "packages");
 var publishOutputPath = Argument<DirectoryPath>("PublishOutputPath", "publish");
 
@@ -72,7 +72,7 @@ Task("PushPackage")
 
 	NuGetPush(Files, new NuGetPushSettings {
      Source = Variables.NugetSource,
-     ApiKey = nuGetKey
+     ApiKey = EnvirionmentVariable("NugetKey")
  });
 });
 
