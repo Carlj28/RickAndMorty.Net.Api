@@ -6,7 +6,7 @@ FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get upgrade
 
-RUN apt-get install wget apt-transport-https git curl nano mono gnupg
+RUN apt-get install wget apt-transport-https git curl nano mono gnupg unzip
 
 #Install .NET core (2.1) and mono 
 RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
