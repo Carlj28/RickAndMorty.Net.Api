@@ -3,6 +3,8 @@
 
 #load versioning.cake
 
+#addin nuget:?package=Cake.Coverlet
+
 var target = Argument("Target", "Build");
 
 var configuration = Argument("Configuration", "Release");
@@ -100,8 +102,19 @@ Task("RunTests")
 	.IsDependentOn("Restore")
 	.Does(() => 
 {
+    var testSettings = new DotNetCoreTestSettings {
+		DiagnosticOutput = true
+    };
+
+    var coveletSettings = new CoverletSettings {
+        CollectCoverage = true,
+        CoverletOutputFormat = CoverletOutputFormat.opencover,
+        CoverletOutputDirectory = Directory(@".\coverage-results\"),
+        CoverletOutputName = $"results-{DateTime.UtcNow:dd-MM-yyyy-HH-mm-ss-FFF}"
+    };
+	
 	//DotNetCoreTest automaticly builds solution so you don't need to depend on build task
-	DotNetCoreTest(Variables.TestProjectDir.ToString());
+    DotNetCoreTest(Variables.TestProjectDir.ToString(), testSettings, coveletSettings);
 });
 
 RunTarget(target);
