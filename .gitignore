@@ -328,4 +328,11 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-[Tt]ools/
+*.dll
+tools/nuget.exe
+tools/packages.config.md5sum
+tools/Addins/Cake.Coverlet.1.3.2/.signature.p7s
+*.nuspec
+tools/Addins/Cake.Coverlet.1.3.2/lib/netstandard2.0/Cake.Coverlet.xml
+tools/packages.config.md5sum
+tools/packages.config.md5sum
