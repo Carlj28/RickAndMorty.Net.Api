@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.4</Version>
+    <Version>0.1.0</Version>
     <Authors>Bartosz Ziolkowski</Authors>
     <PackageLicenseUrl>https://github.com/Carlj28/RickAndMorty.Net.Api/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Bartosz Ziolkowski</Copyright>
@@ -10,6 +10,7 @@
     <RepositoryUrl>https://github.com/Carlj28/RickAndMorty.Net.Api</RepositoryUrl>
     <PackageTags>RickAndMorty</PackageTags>
     <Description>.NET client for Rick And Morty knowledge base api: https://rickandmortyapi.com/</Description>
+    <PackageIconUrl>https://image.ibb.co/dQCMoe/rickandmortyicon.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
