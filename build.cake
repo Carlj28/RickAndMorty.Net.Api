@@ -68,9 +68,12 @@ Task("PushPackage")
 	var key = EnvironmentVariable("NugetKey");
 
 	if(String.IsNullOrEmpty(key))
+	{
+		Information($"Nuget key was not loaded!. Ending task.");
 		return;
-	else
-		Information($"Loaded nuget key.");
+	}
+	
+	Information($"Loaded nuget key.");
 
 	foreach(var file in GetFiles($"{packageOutputPath}/*.nupkg"))
 	{
