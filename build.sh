@@ -54,7 +54,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 ###########################################################################
 
 if [ ! -f "$CAKE_DLL" ]; then
-    curl -Lsfo Cake.CoreCLR.zip "https://www.nuget.org/api/v2/package/Cake.Tool/$CAKE_VERSION" && unzip -q Cake.CoreCLR.zip -d "$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION" && rm -f Cake.CoreCLR.zip
+    curl -Lsfo Cake.Tool.zip "https://www.nuget.org/api/v2/package/Cake.Tool/$CAKE_VERSION" && unzip -q Cake.Tool.zip -d "$TOOLS_DIR/Cake.Tool.$CAKE_VERSION" && rm -f Cake.Tool.zip
     if [ $? -ne 0 ]; then
         echo "An error occured while installing Cake."
         exit 1
