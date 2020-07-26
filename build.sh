@@ -55,7 +55,9 @@ fi
 
 if [ ! -f "$CAKE_DLL" ]; then
     curl -Lsfo Cake.Tool.zip "https://www.nuget.org/api/v2/package/Cake.Tool/$CAKE_VERSION" && unzip -q Cake.Tool.zip -d "$TOOLS_DIR/Cake.Tool.$CAKE_VERSION" && rm -f Cake.Tool.zip
+    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/"
     ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/
+    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/"
     ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/
     if [ $? -ne 0 ]; then
         echo "An error occured while installing Cake."
