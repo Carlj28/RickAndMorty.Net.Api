@@ -40,6 +40,7 @@ echo "Installing .NET CLI..."
 if [ ! -d "$SCRIPT_DIR/.dotnet" ]; then
   mkdir "$SCRIPT_DIR/.dotnet"
 fi
+sudo apt-get install libunwind8
 curl -Lsfo "$SCRIPT_DIR/.dotnet/dotnet-install.sh" https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh
 sudo bash "$SCRIPT_DIR/.dotnet/dotnet-install.sh" --version $DOTNET_VERSION  --install-dir .dotnet --no-path
 export PATH="$SCRIPT_DIR/.dotnet":$PATH
