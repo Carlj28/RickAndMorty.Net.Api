@@ -2,7 +2,7 @@ sudo: required                #run commands as root
 
 language: csharp              #language
 mono: none                    #install latest version of mono
-dotnet: 2.1.402               #install latest dotnet (you need to specify the version number of the .NET Core SDK (not the .NET Core Runtime))
+dotnet: 3.1.302               #install latest dotnet (you need to specify the version number of the .NET Core SDK (not the .NET Core Runtime))
 
 before_install:
   - chmod +x build.sh         #add execution permission

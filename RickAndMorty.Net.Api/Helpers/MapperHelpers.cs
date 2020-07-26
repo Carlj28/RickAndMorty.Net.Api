@@ -19,7 +19,7 @@ namespace RickAndMorty.Net.Api.Helpers
         /// <param name="value">Value.</param>
         /// <returns>Uri object.</returns>
         public static Uri ToUri(this string value) => 
-            String.IsNullOrEmpty(value) || Uri.IsWellFormedUriString(value, UriKind.RelativeOrAbsolute) ? null : new Uri(value);
+            String.IsNullOrEmpty(value) || !Uri.IsWellFormedUriString(value, UriKind.RelativeOrAbsolute) ? null : new Uri(value);
 
         /// <summary>
         /// Simple string to datetime parser.

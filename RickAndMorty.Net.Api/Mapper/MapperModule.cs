@@ -28,19 +28,19 @@ namespace RickAndMorty.Net.Api.Mapper
                             cls.Species, cls.Type, cls.Gender.ToEnum<CharacterGender>(),
                             new CharacterLocation(cls.Location.Name, cls.Location.Url.ToUri()),
                             new CharacterOrigin(cls.Origin.Name, cls.Origin.Url.ToUri()),
-                            cls.Url.ToUri(), cls.Episode.Select(x => x.ToUri()),
+                            cls.Url.ToUri(), cls.Episode.Select(x => x.ToUri()).ToList(),
                             cls.Url.ToUri(), cls.Created.ToDateTime()));
 
 
                 cfg.CreateMap<LocationDto, Location>()
                     .ConstructUsing(cls =>
-                        new Location(cls.Id, cls.Name, cls.Type, cls.Dimension, cls.Residents.Select(x => x.ToUri()), cls.Url.ToUri(),
+                        new Location(cls.Id, cls.Name, cls.Type, cls.Dimension, cls.Residents.Select(x => x.ToUri()).ToList(), cls.Url.ToUri(),
                             cls.Created.ToDateTime()));
 
                 cfg.CreateMap<EpisodeDto, Episode>()
                     .ConstructUsing(cls =>
                         new Episode(cls.Id, cls.Name, cls.Air_date.ToDateTime(), cls.Episode,
-                            cls.Characters.Select(x => x.ToUri()), cls.Url.ToUri(), cls.Created.ToDateTime()));
+                            cls.Characters.Select(x => x.ToUri()).ToList(), cls.Url.ToUri(), cls.Created.ToDateTime()));
 
                 cfg.AllowNullCollections = true;
             });

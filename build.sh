@@ -8,9 +8,9 @@
 # Define directories.
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 TOOLS_DIR=$SCRIPT_DIR/tools
-DOTNET_VERSION=2.1.402
-CAKE_VERSION=0.30.0
-CAKE_DLL=$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION/Cake.dll
+DOTNET_VERSION=3.1.302
+CAKE_VERSION=0.38.4
+CAKE_DLL=$TOOLS_DIR/Cake.Tool.$CAKE_VERSION/Cake.dll
 NUGET_EXE=$TOOLS_DIR/nuget.exe
 
 ###########################################################################
@@ -53,7 +53,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 ###########################################################################
 
 if [ ! -f "$CAKE_DLL" ]; then
-    curl -Lsfo Cake.CoreCLR.zip "https://www.nuget.org/api/v2/package/Cake.CoreCLR/$CAKE_VERSION" && unzip -q Cake.CoreCLR.zip -d "$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION" && rm -f Cake.CoreCLR.zip
+    curl -Lsfo Cake.CoreCLR.zip "https://www.nuget.org/api/v2/package/Cake.Tool/$CAKE_VERSION" && unzip -q Cake.CoreCLR.zip -d "$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION" && rm -f Cake.CoreCLR.zip
     if [ $? -ne 0 ]; then
         echo "An error occured while installing Cake."
         exit 1

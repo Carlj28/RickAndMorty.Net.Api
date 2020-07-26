@@ -1,5 +1,6 @@
 ﻿using RickAndMorty.Net.Api.Helpers;
 using RickAndMorty.Net.Api.Models.Enums;
+using System;
 using Xunit;
 
 namespace RickAndMorty.Net.Api.Tests
@@ -32,6 +33,14 @@ namespace RickAndMorty.Net.Api.Tests
                 dimension: "TestDimension");
 
             Assert.Equal("/api/location/?name=TestName&type=TestType&dimension=TestDimension", url);
+        }
+
+        [Fact]
+        public void ToUriMapperHelpers()
+        {
+            var url = "https://rickandmortyapi.com/api/location/6";
+
+            Assert.NotNull(url.ToUri());
         }
     }
 }
