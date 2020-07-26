@@ -59,8 +59,8 @@ if [ ! -f "$CAKE_DLL" ]; then
     ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/
     echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/"
     ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/
-    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/tools"
-    ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/tools
+    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/tools/netcoreapp3.0"
+    ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/tools/netcoreapp3.0
     echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/package"
     ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/package
     echo "end"
