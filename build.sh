@@ -10,7 +10,7 @@ SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 TOOLS_DIR=$SCRIPT_DIR/tools
 DOTNET_VERSION=3.1.302
 CAKE_VERSION=0.38.4
-CAKE_DLL=$TOOLS_DIR/Cake.Tool.$CAKE_VERSION/Cake.dll
+CAKE_DLL=$TOOLS_DIR/Cake.Tool.$CAKE_VERSION/tools/netcoreapp3.0/any/Cake.dll
 NUGET_EXE=$TOOLS_DIR/nuget.exe
 
 ###########################################################################
@@ -55,15 +55,6 @@ fi
 
 if [ ! -f "$CAKE_DLL" ]; then
     curl -Lsfo Cake.Tool.zip "https://www.nuget.org/api/v2/package/Cake.Tool/$CAKE_VERSION" && unzip -q Cake.Tool.zip -d "$TOOLS_DIR/Cake.Tool.$CAKE_VERSION" && rm -f Cake.Tool.zip
-    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/"
-    ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/
-    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/"
-    ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/
-    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/tools/netcoreapp3.0"
-    ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/tools/netcoreapp3.0
-    echo "/home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/package"
-    ls /home/travis/build/Carlj28/RickAndMorty.Net.Api/tools/Cake.Tool.0.38.4/package
-    echo "end"
     if [ $? -ne 0 ]; then
         echo "An error occured while installing Cake."
         exit 1
