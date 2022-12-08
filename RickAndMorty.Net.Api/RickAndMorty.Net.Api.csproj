@@ -18,7 +18,7 @@
     <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="Ensure.That" Version="9.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
 </Project>
